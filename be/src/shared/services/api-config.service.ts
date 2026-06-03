@@ -9,7 +9,7 @@ interface AppConfig {
 
 @Injectable()
 export class ApiConfigService {
-  constructor(private readonly configService: ConfigService) { }
+  constructor(private readonly configService: ConfigService) {}
 
   private get(key: string): string {
     const value = this.configService.get<string>(key);
