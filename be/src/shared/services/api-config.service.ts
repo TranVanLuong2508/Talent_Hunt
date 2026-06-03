@@ -9,7 +9,7 @@ interface AppConfig {
 
 @Injectable()
 export class ApiConfigService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(private readonly configService: ConfigService) { }
 
   private get(key: string): string {
     const value = this.configService.get<string>(key);
@@ -78,6 +78,15 @@ export class ApiConfigService {
       database: this.getString('DB_DATABASE'),
       logging: this.getBoolean('ENABLE_ORM_LOGS'),
       synchronize: this.getBoolean('ENABLE_SYCHORIZE_DB'),
+    };
+  }
+
+  get S3ServiceConfig() {
+    return {
+      region: this.getString('AWS_REGION'),
+      access_key: this.getString('AWS_ACCESS_KEY_ID'),
+      secret_key: this.getString('AWS_SECRET_ACCESS_KEY'),
+      bucket_name: this.getString('AWS_S3_BUCKET_NAME'),
     };
   }
 }
