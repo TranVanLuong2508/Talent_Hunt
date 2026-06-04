@@ -31,10 +31,7 @@ describe('UserService', () => {
   // beforeEach chay truoc MOI test case -> dam bao moi test doc lap
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        UserService,
-        { provide: PrismaService, useValue: mockPrisma },
-      ],
+      providers: [UserService, { provide: PrismaService, useValue: mockPrisma }],
     }).compile();
 
     service = module.get<UserService>(UserService);

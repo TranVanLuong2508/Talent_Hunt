@@ -27,9 +27,7 @@ describe('UserController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UserController],
-      providers: [
-        { provide: UserService, useValue: mockUserService },
-      ],
+      providers: [{ provide: UserService, useValue: mockUserService }],
     }).compile();
 
     controller = module.get<UserController>(UserController);
@@ -97,9 +95,7 @@ describe('UserController', () => {
     it('should propagate NotFoundException from service', async () => {
       // Khi service throw error, controller khong catch
       // -> error "bubble up" len, NestJS xu ly tra ve 404
-      mockUserService.findById.mockRejectedValue(
-        new NotFoundException('User not found'),
-      );
+      mockUserService.findById.mockRejectedValue(new NotFoundException('User not found'));
 
       await expect(controller.findById('999')).rejects.toThrow(NotFoundException);
     });
