@@ -7,6 +7,7 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
 import { UsersModule } from './modules/users/users.module';
 import { CloudModule } from './modules/cloud/cloud.module';
 import { S3Module } from './modules/s3/s3.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { S3Module } from './modules/s3/s3.module';
     UsersModule,
     CloudModule,
     S3Module,
+    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

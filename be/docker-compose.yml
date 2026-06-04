@@ -1,18 +1,16 @@
-version: '3.9'
-
 services:
   postgres:
-    image: postgres:17
-    container_name: postgres-db
-    restart: unless-stopped
+    image: postgres:18
+    container_name: talent_hunt_db
+    restart: always
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: mydb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: talent_hunt
     ports:
-      - '5432:5432'
+      - '5434:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql
 
 volumes:
-  postgres_data:
+  pgdata:

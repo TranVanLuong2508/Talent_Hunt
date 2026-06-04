@@ -1,5 +1,3 @@
-import { join } from 'node:path';
-import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
@@ -66,18 +64,22 @@ export class ApiConfigService {
     };
   }
 
-  get postgreSQLConfig(): TypeOrmModuleOptions {
-    const entities = [join(__dirname, `../../modules/**/*.entity{.ts,.js}`)];
+  get postgreSQLConfig() {
+    const host = this.getString('DB_HOST');
+    const port = this.getNumber('DB_PORT');
+    const username = this.getString('DB_USERNAME');
+    const password = this.getString('DB_PASSWORD');
+    const database = this.getString('DB_DATABASE');
+    // const logging = this.getBoolean('ENABLE_ORM_LOGS');
+    // const synchronize = this.getBoolean('ENABLE_SYCHORIZE_DB');
     return {
-      entities,
-      type: 'postgres',
-      host: this.getString('DB_HOST'),
-      port: this.getNumber('DB_PORT'),
-      username: this.getString('DB_USERNAME'),
-      password: this.getString('DB_PASSWORD'),
-      database: this.getString('DB_DATABASE'),
-      logging: this.getBoolean('ENABLE_ORM_LOGS'),
-      synchronize: this.getBoolean('ENABLE_SYCHORIZE_DB'),
+      dataSourceUrl: `postgresql://${username}:${password}@${host}:${port}/${database}`,
+    };
+  }
+
+  get prismaConfig() {
+    return {
+      dataSourceUrl: this.getString('DATABASE_URL'),
     };
   }
 
