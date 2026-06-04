@@ -25,7 +25,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   }> {
     try {
       await this.$queryRaw`SELECT 1`;
-      console.log('Connect DB sucessfully');
       return {
         connected: true,
       };
